@@ -99,9 +99,16 @@ if(valright){
     if(valcenter){
     valcenter = 1;
     }
-  printf("000%d%d%d%d%d\n",valup,valdown,valleft,valright,valcenter);
+  printf("000%d%d%d%d%d\n",valcenter,valright,valleft,valdown,valup);
 
+    int8_t val1 = (valdown << 1);
+    int8_t val2 = (valleft << 2);
+    int8_t val3 = (valright << 3);
+    int8_t val4 = (valcenter << 4);
 
+    int8_t output = valup |= val1 |= val2 |= val3 |= val4;
+
+    printf("%d\n",output);
 
 
 
