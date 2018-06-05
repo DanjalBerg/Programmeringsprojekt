@@ -18,14 +18,16 @@
 #include "LUT.h"
 #include "trig.h"
 
-/*
+
 int main(void){
     init_usb_uart( 115200 );
     clrscr();
-
-
-    // Port A
-    RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A
+    gotoxy(1,1);
+ RCC->AHBENR |= RCC_AHBPeriph_GPIOA;
+ RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port B
+RCC->AHBENR |= RCC_AHBPeriph_GPIOC; // Enable clock for GPIO Port c
+    // Port A (up)
+    // Enable clock for GPIO Port A
     // Set pin PA0 to input
     GPIOA->MODER &= ~(0x00000003 << (4 * 2)); // Clear mode register
     GPIOA->MODER |=  (0x00000000 << (4 * 2)); // Set mode register (0x00 - Input,
@@ -35,9 +37,9 @@ int main(void){
     //No pull, 0x01 - Pull-up, 0x02 - Pull-down)
 
     uint16_t valup = GPIOA->IDR & (0x001 << 4);
+ //   uint16_t valup0 = (valup >> 4);
+    // Port B (down)
 
-    // Port B
- RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port B
     // Set pin PA0 to input
     GPIOB->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
     GPIOB->MODER |=  (0x00000000 << (0 * 2)); // Set mode register (0x00 - Input,
@@ -45,10 +47,65 @@ int main(void){
     GPIOB->PUPDR &= ~(0x00000003 << (0 * 2)); // Clear push/pull register
     GPIOB->PUPDR |=  (0x00000000 << (0 * 2)); // Set push/pull register (0x00 -
     //No pull, 0x01 - Pull-up, 0x02 - Pull-down)
-
     uint16_t valdown = GPIOB->IDR & (0x001 << 0);
 
-    printf("%d\n",valdown);
+    // Port C(right)
+    // Set pin PA0 to input
+    GPIOC->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
+    GPIOC->MODER |=  (0x00000000 << (0 * 2)); // Set mode register (0x00 - Input,
+    //0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+    GPIOC->PUPDR &= ~(0x00000003 << (0 * 2)); // Clear push/pull register
+    GPIOC->PUPDR |=  (0x00000000 << (0 * 2)); // Set push/pull register (0x00 -
+    //No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+
+    uint16_t valright = GPIOC->IDR & (0x001 << 0);
+ // Port C(left)
+    // Set pin PC1 to input
+    GPIOC->MODER &= ~(0x00000003 << (1 * 2)); // Clear mode register
+    GPIOC->MODER |=  (0x00000000 << (1 * 2)); // Set mode register (0x00 - Input,
+    //0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+    GPIOC->PUPDR &= ~(0x00000003 << (1 * 2)); // Clear push/pull register
+    GPIOC->PUPDR |=  (0x00000000 << (1 * 2)); // Set push/pull register (0x00 -
+    //No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+    uint16_t valleft = GPIOC->IDR & (0x001 << 1);
+
+  // PortB(Center)
+
+    // Set pin PB5 to input
+    GPIOB->MODER &= ~(0x00000003 << (5 * 2)); // Clear mode register
+    GPIOB->MODER |=  (0x00000000 << (5 * 2)); // Set mode register (0x00 - Input,
+    //0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
+    GPIOB->PUPDR &= ~(0x00000003 << (5 * 2)); // Clear push/pull register
+    GPIOB->PUPDR |=  (0x00000000 << (5 * 2)); // Set push/pull register (0x00 -
+    //No pull, 0x01 - Pull-up, 0x02 - Pull-down)
+    uint16_t valcenter = GPIOB->IDR & (0x001 << 5);
+
+    if(valup){
+    valup = 1;
+    }
+
+    if(valdown){
+    valdown = 1;
+    }
+
+if(valright){
+    valright = 1;
+    }
+
+    if(valleft){
+    valleft = 1;
+    }
+
+    if(valcenter){
+    valcenter = 1;
+    }
+  printf("000%d%d%d%d%d\n",valup,valdown,valleft,valright,valcenter);
+
+
+
+
+
+//    uint16_t valdown = GPIOC->IDR & (0x001 << 1);
 
 
 
@@ -69,13 +126,16 @@ int main(void){
 //    // Set pin PA0 to input
 //    GPIOA->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
 //    GPIOA->MODER |= (0x00000004 << (0 * 2)); // Set mode register (0x00 - Input,
-   while(1){}
+
+   while(1){
+
+   }
 }
-*/
 
 
 
 
+/*
 int main(void){
     init_usb_uart( 115200 );
    clrscr();
@@ -126,10 +186,11 @@ int main(void){
         }
 
 updatepos(&b);
-if ((b.posi.x <= (borderX/2+6 << 14)) && (b.posi.x >= ((borderX/2-6) << 14 )) && (b.posi.y <= (borderY/2+2 << 14)) && (b.posi.y >= ((borderY/2-2) << 14 ))) {}
+if ((b.posi.x <= (borderX/2+6 << 14)) && (b.posi.x >= ((borderX/2-6) << 14 ))
+    && (b.posi.y <= (borderY/2+2 << 14)) && (b.posi.y >= ((borderY/2-2) << 14 ))) {}
  //  counter(borderX/2-5,borderY/2-1,borderX/2+5,borderY/2+1);
 
-else {
+    else {
 
 
     gotoxy(b.posi.x >> 14,b.posi.y >> 14);
@@ -146,9 +207,9 @@ else {
 
 
 
+    }
 }
-}
-
+*/
 
 
 /*
