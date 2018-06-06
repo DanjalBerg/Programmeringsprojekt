@@ -21,9 +21,22 @@
 
 int main(void){
     init_usb_uart( 115200 );
+    init_RGB();
+    init_joystick();
 
 clrscr();
 gotoxy(1,1);
+
+
+    // Port A (BLUE)
+    GPIOA->ODR |= (0x0001 << 9); //Set pin PA9 to high
+
+    // Port C (GREEN)
+    GPIOC->ODR |= (0x0001 << 7); //Set pin PC7 to high
+
+    // Port B (RED)
+    GPIOB->ODR |= (0x0001 << 4); //Set pin PB4 to high
+
 
 
 
@@ -35,8 +48,9 @@ gotoxy(1,1);
     printf("%d\n",val);
     }
     val_old = val;
-
+    set_Led(val);
    }
+
 }
 
 
