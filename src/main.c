@@ -24,7 +24,7 @@
 
 
 
-uint8_t type_tex(char *c, int8_t *buffer, int8_t x, int8_t y){
+uint8_t type_tex(char *c, int8_t *buffer, int8_t  x, int8_t  y){
     uint8_t k = 0;
 
     while (c[k] != 0x00){
@@ -42,7 +42,11 @@ memset(nothing,0x00,512);
  lcd_push_buffer(nothing);
 }
 
-void lcd_update(){
+void lcd_update(int8_t *t_flag, int8_t *buffer, int8_t  x, int8_t  y){
+if (*t_flag == 0){
+type_tex("fag",  buffer,  x,  y);
+*t_flag ++;
+}
 
 }
 
@@ -50,14 +54,25 @@ int main(void) {
     init_usb_uart( 115200 );
     clrscr();
     gotoxy(1,1);
+    printf("12");
+
     init_spi_lcd();
     uint8_t buffer[512];
+    printf("12");
     memset(buffer,0x00,512);
+    printf("12");
     uint8_t priority = 1;
-    type_tex("Hejsa.", buffer, 0, 0);
-    init_timer(priority);
+    printf("12");
+
+
+    //init_timer(priority);
+//type_tex("gay", buffer, 0, 0);
+
+    lcd_update( t_flag, buffer, 0, 0);
     lcd_push_buffer(buffer);
-    while (1) {}
+    while (1) {
+    printf("f");
+    }
 
 
 }

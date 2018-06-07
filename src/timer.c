@@ -19,10 +19,11 @@ void time(struct interrupt_t *t){
     t->m = 0;
     t->s = 0;
     t->hs = 0;
+
 }
 
 void TIM2_IRQHandler(void){
-    flag=1;
+*t_flag = 0;
 
     printf("kris da noda jedi master son of Goku\n");
     TIM2->SR &= ~0x0001; // clear interrupt bit
