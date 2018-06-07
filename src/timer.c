@@ -49,8 +49,8 @@ void init_stopwatch(){
     printf("Split time 1:");
     gotoxy(2,5);
     printf("Split time 2:");
-
 }
+
 
 void stopwatch(uint8_t js, uint8_t *ss, uint8_t *push){
 

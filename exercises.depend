@@ -452,7 +452,7 @@
 	"30010_io.h"
 	"LUT.h"
 
-1528368152 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\main.c
+1528366394 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -467,12 +467,12 @@
 1528282811 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\controller.h
 	"30010_io.h"
 
-1528366903 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\timer.h
+1528366330 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\timer.h
 	"30010_io.h"
 	"ansi.h"
 	"controller.h"
 
-1528366906 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\timer.c
+1528365277 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\timer.c
 	"timer.h"
 
 1528318106 source:c:\users\tadea veng\documents\github\programmeringsprojekt\spl\src\stm32f30x_adc.c
