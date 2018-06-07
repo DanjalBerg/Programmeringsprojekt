@@ -19,82 +19,54 @@
 #include "trig.h"
 #include "controller.h"
 #include "timer.h"
-#include <string.h>
-#include "charset.h"
 
-
-
-uint8_t type_tex(char *c, int8_t *buffer, int8_t x, int8_t y){
-    uint8_t k = 0;
-
-    while (c[k] != 0x00){
-        for (uint8_t i = 0 ; i < 5 ; i++){
-            buffer[x + y * 128 + i + k*5] = character_data[c[k] - 0x20][i];
-        }
-        k++;
+uint16_t ret() {
+    uint16_t i;
+    char arr[21] = {0};
+    for (i = 0; i < 20; i++) {
+        arr[i] = uart_getc();
     }
-
-}
-
-void clrlcd(){
-    int8_t nothing[512];
-memset(nothing,0x00,512);
- lcd_push_buffer(nothing);
-}
-
-void lcd_update(){
-
-}
-
-int main(void) {
-    init_usb_uart( 115200 );
-    clrscr();
-    gotoxy(1,1);
-    init_spi_lcd();
-    uint8_t buffer[512];
-    memset(buffer,0x00,512);
-    uint8_t priority = 1;
-    type_tex("Hejsa.", buffer, 0, 0);
-    init_timer(priority);
-    lcd_push_buffer(buffer);
-    while (1) {}
-
-
+    if (arr == "start") {
+        return (16);
+    }
+    else if (arr == "stop" {
+    return (16);
+    }
+    else if (arr == "split1") {
+    return (4);
+    }
+    else if (arr == "split2") {
+    return (8);
+    }
+    else if (arr == "reset") {
+    return (2);
+    }
+    else if (arr == "help") {
+    return (1);
+    }
 }
 
 
-
-
-
-
-
-/*
 int main(void) {
     init_usb_uart( 115200 );
     gotoxy(1, 1);
     clrscr();
-    uint16_t priority = 1;
-    uint8_t ss =1, push=0;
-    time(&t);
 
-
-
-    // Lav vindue
-    clrscr();
-    init_stopwatch();
-    init_timer(priority);
     while (1) {
+        int var2 = ret;
+        if (var2 == 16)  {
 
-        uint8_t js = ret();
+        }
+        uint8_t js = readJoystick();
         stopwatch(js, &ss, &push);
     }
 }
-*/
 
 
 
 
-/*
+
+
 int main(void){
     init_usb_uart( 115200 );
     printf("%c[?25l",ESC);
@@ -117,10 +89,6 @@ int main(void){
         stopwatch(js,&ss,&push);
    }
 }
-*/
-
-
-
 
 
 /*
