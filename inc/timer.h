@@ -16,6 +16,6 @@ void time(struct interrupt_t *t);
 void TIM2_IRQHandler(void);
 void init_stopwatch();
 void stopwatch(uint8_t js, uint8_t *ss, uint8_t *push);
-
+uint8_t ret();
 
 #endif /* TIMER_H_INCLUDED */
