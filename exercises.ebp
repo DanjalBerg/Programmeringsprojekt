@@ -96,6 +96,7 @@
 		<Unit filename="inc\stm32f30x.h" />
 		<Unit filename="inc\stm32f30x_conf.h" />
 		<Unit filename="inc\system_stm32f30x.h" />
+		<Unit filename="inc\timer.h" />
 		<Unit filename="inc\trig.h" />
 		<Unit filename="readme.txt" />
 		<Unit filename="SPL\inc\stm32f30x_adc.h" />
@@ -205,6 +206,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\system_stm32f30x.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\timer.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\trig.c">
