@@ -54,10 +54,12 @@ void TIM2_IRQHandler(void){
 
 
 int main(void){
-    uint16_t Priority = 1;
     init_usb_uart( 115200 );
+    printf("%c[?25l",ESC);
+    uint16_t Priority = 1;
     init_joystick();
     gotoxy(1,1);
+
     time(&t);
     uint8_t ss = 1;
     uint8_t push = 0;
@@ -110,6 +112,7 @@ int main(void){
         // Print Split time 1
         uint8_t val = readJoystick();
         if (val == 4){
+
             if ((t.s < 10) && (t.m <10 )){
             gotoxy(20,4);
             printf("%d:0%d:0%d.%d",t.h,t.m,t.s,t.hs);
@@ -147,6 +150,7 @@ int main(void){
 
         }
         else if (val == 16){
+
             if (ss==1 && push ==0){
                 __disable_irq();
                 ss=0;
@@ -158,11 +162,14 @@ int main(void){
                 push = 1;
             }
         }
-        else if (val == 0)
-        {
+        else if (val == 0){
            push = 0;
         }
-
+        else if (val == 2){
+            time(&t);
+            gotoxy(20,3);
+            printf("%d:0%d:0%d.0%d",t.h,t.m,t.s,t.hs);
+        }
    }
 }
 
