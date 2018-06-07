@@ -51,7 +51,7 @@ void init_stopwatch(){
     printf("Split time 2:");
 
 }
-void stopwatch(uint8_t *ss, uint8_t *push){
+void stopwatch_joystick(uint8_t *ss, uint8_t *push){
 
 
         // Print time since start

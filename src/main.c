@@ -20,11 +20,47 @@
 #include "controller.h"
 #include "timer.h"
 
+uint16_t ret(){
+    uint16_t i;
+    char arr[21]={0};
+    for(i =0; i<20; i++){
+    arr[i] = uart_getc();
+    }
+    if(arr=="start"){
+    return(16);
+    }
+        else if(arr == "stop"{
+            return(16);
+        }
+        else if(arr == "split1"){
+              return(4);
+        }
+        else if(arr == "split2"){
+            return(8);
+        }
+        else if(arr == "reset"){
+             return(2);
+        }
+        else if(arr == "help"){
+        return(1);
+        }
+}
 
 
+int main(void){
+    init_usb_uart( 115200 );
+    gotoxy(1,1);
+    clrscr();
 
+   while(1){
+    int var2=ret;
+    if(var2==16)  {
 
+    }
+   }
+}
 
+/* //6.1
 int main(void){
     init_usb_uart( 115200 );
     printf("%c[?25l",ESC);
@@ -44,10 +80,9 @@ uint8_t ss =1, push=0;
     init_timer(priority);
 
    while(1){
-    stopwatch(&ss,&push);
-}
-}
-
+    stopwatch_joystick(&ss,&push);
+    }
+*/
 
 /*
 int main(void){
