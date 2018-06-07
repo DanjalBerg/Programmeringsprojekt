@@ -51,7 +51,7 @@ void init_stopwatch(){
     printf("Split time 2:");
 
 }
-void stopwatch(uint8_t *ss, uint8_t *push){
+void stopwatch(uint8_t js, uint8_t *ss, uint8_t *push){
 
 
         // Print time since start
@@ -74,8 +74,7 @@ void stopwatch(uint8_t *ss, uint8_t *push){
 
 
         // Print Split time 1
-        uint8_t val = readJoystick();
-        if (val == 4){
+        if (js == 4){
 
             if ((t.s < 10) && (t.m <10 )){
             gotoxy(20,4);
@@ -94,7 +93,7 @@ void stopwatch(uint8_t *ss, uint8_t *push){
             printf("%d:%d:%d.%d",t.h,t.m,t.s,t.hs);
             }
         }
-        else if (val == 8){
+        else if (js == 8){ // Split time 2
             if ((t.s < 10) && (t.m <10 )){
             gotoxy(20,5);
             printf("%d:0%d:0%d.%d",t.h,t.m,t.s,t.hs);
@@ -113,7 +112,7 @@ void stopwatch(uint8_t *ss, uint8_t *push){
             }
 
         }
-        else if (val == 16){
+        else if (js == 16){ // Toggle start/stop
 
             if (*ss==1 && *push ==0){
                 __disable_irq();
@@ -126,10 +125,10 @@ void stopwatch(uint8_t *ss, uint8_t *push){
                 *push = 1;
             }
         }
-        else if (val == 0){
+        else if (js == 0){ // Do nothing
            *push = 0;
         }
-        else if (val == 2){
+        else if (js == 2){  // Reset timer
             time(&t);
             gotoxy(20,3);
             printf("%d:0%d:0%d.0%d",t.h,t.m,t.s,t.hs);
