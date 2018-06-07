@@ -20,46 +20,55 @@
 #include "controller.h"
 #include "timer.h"
 
-uint16_t ret(){
+uint16_t ret() {
     uint16_t i;
-    char arr[21]={0};
-    for(i =0; i<20; i++){
-    arr[i] = uart_getc();
+    char arr[21] = {0};
+    for (i = 0; i < 20; i++) {
+        arr[i] = uart_getc();
     }
-    if(arr=="start"){
-    return(16);
+    if (arr == "start") {
+        return (16);
     }
-        else if(arr == "stop"{
-            return(16);
-        }
-        else if(arr == "split1"){
-              return(4);
-        }
-        else if(arr == "split2"){
-            return(8);
-        }
-        else if(arr == "reset"){
-             return(2);
-        }
-        else if(arr == "help"){
-        return(1);
-        }
+    else if (arr == "stop" {
+    return (16);
+    }
+    else if (arr == "split1") {
+    return (4);
+    }
+    else if (arr == "split2") {
+    return (8);
+    }
+    else if (arr == "reset") {
+    return (2);
+    }
+    else if (arr == "help") {
+    return (1);
+    }
 }
 
 
-int main(void){
+int main(void) {
     init_usb_uart( 115200 );
-    gotoxy(1,1);
+    gotoxy(1, 1);
     clrscr();
 
-   while(1){
-    int var2=ret;
-    if(var2==16)  {
+    while (1) {
+        int var2 = ret;
+        if (var2 == 16)  {
 
+        }
+        uint8_t js = readJoystick();
+        stopwatch(js, &ss, &push);
     }
-            uint8_t js = readJoystick();
-        stopwatch(js,&ss,&push);
-   }
+}
+
+void asdf()
+
+{
+    for (int i = 0; i < count; ++i)
+    {
+        /* code */
+    }
 }
 
 /* //6.1
