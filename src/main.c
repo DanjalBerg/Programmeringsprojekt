@@ -24,53 +24,46 @@
 #include "lcd.h"
 
 
-//uint8_t type_tex(char *c, int8_t *buffer, int8_t  x, int8_t  y)
-//{
-//    uint8_t k = 0;
-//
-//    while (c[k] != 0x00)
-//    {
-//        for (uint8_t i = 0 ; i < 5 ; i++)
-//        {
-//
-//            buffer[x + y * 128 + i + k*5] = character_data[c[k] - 0x20][i];
-//        }
-//        k++;
-//    }
-//}
 
-//uint8_t type_tex_scroll(char *c, int8_t *buffer, uint8_t  *x, uint8_t  y)
-//{
-//    uint8_t k = 0;
-//    while (c[k] != 0x00)
-//    {
-//        for (uint8_t i = 0 ; i < 5 ; i++)
-//        {
-//
-//            buffer[(y * 128) + (*x + i + k*5) % 128] = character_data[c[k] - 0x20][i];
-//        }
-//        k++;
-//    }
-//    if(*x == 127)
-//        *x=1;
-//    (*x)++;
-//    printf("%d\n",*x);
-//
-//}
+int main(void)
+{
+    init_usb_uart( 115200 );
+    clrscr();
+    gotoxy(1,1);
+
+    RCC->CFGR2  &= ~RCC_CFGR2_ADCPRE12;         // Clear ADC12 prescaler bits
+    RCC->CFGR2  |=  RCC_CFGR2_ADCPRE12_DIV6;    // Set ADC12 prescaler to 6
+    RCC->AHBENR |=  RCC_AHBPeriph_ADC12;        // Enable clock for ADC12
+
+    ADC1->CR    = 0x00000000;                   // Clear CR register
+    ADC1->CFGR &=  0xFDFFC007;                  // Clear ADC1 config register
+    ADC1->SQR1 &= ~ADC_SQR1_L;                  // Clear regular sequence register 1
+
+    ADC1->CR |= 0x10000000;                     // Enable internal ADC voltage regulator
+    for(int i = 0 ; i < 1000 ; i++) {}          // Wait for about 16 microseconds
+
+    ADC1->CR |= 0x80000000;                     // Start ADC1 calibration
+    while (!(ADC1->CR & 0x80000000));           // Wait for calibration to finish
+        for (int i = 0 ; i < 100 ; i++) {}      // Wait for a little while
+
+    ADC1->CR |= 0x00000001;                     // Enable ADC1 (0x01 -Enable, 0x02 -Disable)
+    while (!(ADC1->ISR& 0x00000001));           // Wait until ready
 
 
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
 
-//void lcd_update( int8_t *buffer, uint8_t  *x, uint8_t  y)
-//{
-//    if (t_flag == 1)
-//    {
-//        memset(buffer, 0x00, 512);
-//        type_tex_scroll("fag",  buffer,  x,  y);
-//        t_flag = 0;
-//    }
-//}
+    ADC_StartConversion(ADC1);                  // Start ADC read
+    while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+
+    uint16_t x = ADC_GetConversionValue(ADC1);  // Read the ADC value
+
+    printf("%d",x);
+    while (1){}
+}
 
 
+
+/*
 int main(void)
 {
     init_usb_uart( 115200 );
@@ -85,26 +78,18 @@ int main(void)
 
 
     init_timer(priority);
-//type_tex("gay", buffer, 0, 0);
-
 
     while (1)
     {
-//clrlcd();
-
-//lcd_update2( buffer,  1, 1);
-//lcd_push_buffer(buffer);
-
         if (get_flag() == 1)
         {
             lcd_update(buffer, &x,1);
             lcd_push_buffer(buffer);
             set_flag(0);
-
         }
     }
 }
-
+*/
 
 
 

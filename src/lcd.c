@@ -39,5 +39,5 @@ void type_tex_scroll(char *c, uint8_t *buffer, uint8_t  *x, uint8_t  y)
 void lcd_update( uint8_t *buffer, uint8_t  *x, uint8_t  y)
 {
     memset(buffer, 0x00, 512);
-    type_tex_scroll("kris",  buffer,  x,  y);
+    type_tex_scroll("kris da noda er",  buffer,  x,  y);
 }
