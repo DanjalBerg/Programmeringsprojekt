@@ -452,7 +452,7 @@
 	"30010_io.h"
 	"LUT.h"
 
-1528382211 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\main.c
+1528462868 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -462,6 +462,7 @@
 	"timer.h"
 	<string.h>
 	"charset.h"
+	"lcd.h"
 
 1528374154 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\controller.c
 	"controller.h"
@@ -469,12 +470,12 @@
 1528374154 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\controller.h
 	"30010_io.h"
 
-1528377228 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\timer.h
+1528462607 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\timer.h
 	"30010_io.h"
 	"ansi.h"
 	"controller.h"
 
-1528382277 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\timer.c
+1528462596 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\timer.c
 	"timer.h"
 
 1528318106 source:c:\users\tadea veng\documents\github\programmeringsprojekt\spl\src\stm32f30x_adc.c
@@ -723,7 +724,7 @@
 	"controller.h"
 	"timer.h"
 
-1528381025 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\charset.h
+1528462391 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\charset.h
 
 1528385563 source:c:\users\krist\documents\c files\programmeringsprojekt\spl\src\stm32f30x_adc.c
 	"stm32f30x_adc.h"
@@ -1224,4 +1225,15 @@
 
 1528449365 source:c:\users\kris\documents\dtu\semester 6\programming project\programming project repo 1\programmeringsprojekt\src\timer.c
 	"timer.h"
+
+1528462915 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\lcd.c
+	"lcd.h"
+
+1528462932 c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\inc\lcd.h
+	"30010_io.h"
+	"timer.h"
+	"charset.h"
+
+1528462390 source:c:\users\danjal\documents\mega\skrivebord_dtu\dtu_6_semester\programmeringsproject\git\programmeringsprojekt\src\charset.c
+	"charset.h"
 

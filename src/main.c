@@ -21,69 +21,88 @@
 #include "timer.h"
 #include <string.h>
 #include "charset.h"
+#include "lcd.h"
 
 
-
-uint8_t type_tex(char *c, int8_t *buffer, int8_t  x, int8_t  y){
-    uint8_t k = 0;
-
-    while (c[k] != 0x00){
-        for (uint8_t i = 0 ; i < 5 ; i++){
-            buffer[x + y * 128 + i + k*5] = character_data[c[k] - 0x20][i];
-        }
-        k++;
-    }
-
-}
-
-//void clrlcd(){
-//    int8_t nothing[512];
-//memset(nothing,0x00,512);
-// lcd_push_buffer(nothing);
+//uint8_t type_tex(char *c, int8_t *buffer, int8_t  x, int8_t  y)
+//{
+//    uint8_t k = 0;
+//
+//    while (c[k] != 0x00)
+//    {
+//        for (uint8_t i = 0 ; i < 5 ; i++)
+//        {
+//
+//            buffer[x + y * 128 + i + k*5] = character_data[c[k] - 0x20][i];
+//        }
+//        k++;
+//    }
 //}
 
-void lcd_update( int8_t *buffer, int8_t  x, int8_t  y){
-if (t_flag == 1){
-type_tex("fag",  buffer,  x,  y);
-t_flag = 0;
-}
+//uint8_t type_tex_scroll(char *c, int8_t *buffer, uint8_t  *x, uint8_t  y)
+//{
+//    uint8_t k = 0;
+//    while (c[k] != 0x00)
+//    {
+//        for (uint8_t i = 0 ; i < 5 ; i++)
+//        {
+//
+//            buffer[(y * 128) + (*x + i + k*5) % 128] = character_data[c[k] - 0x20][i];
+//        }
+//        k++;
+//    }
+//    if(*x == 127)
+//        *x=1;
+//    (*x)++;
+//    printf("%d\n",*x);
+//
+//}
 
-}
 
-int main(void) {
+
+//void lcd_update( int8_t *buffer, uint8_t  *x, uint8_t  y)
+//{
+//    if (t_flag == 1)
+//    {
+//        memset(buffer, 0x00, 512);
+//        type_tex_scroll("fag",  buffer,  x,  y);
+//        t_flag = 0;
+//    }
+//}
+
+
+int main(void)
+{
     init_usb_uart( 115200 );
     clrscr();
     gotoxy(1,1);
-    printf("12");
 
     init_spi_lcd();
     uint8_t buffer[512];
-    printf("12");
     memset(buffer,0x00,512);
-    printf("12");
     uint8_t priority = 1;
-    printf("12");
+    uint8_t x = 1;
 
 
     init_timer(priority);
 //type_tex("gay", buffer, 0, 0);
 
 
-    while (1) {
+    while (1)
+    {
 //clrlcd();
 
-lcd_update( buffer,  1, 1);
-lcd_push_buffer(buffer);
-    for (uint32_t i=0; i<10000000; i++){
+//lcd_update2( buffer,  1, 1);
+//lcd_push_buffer(buffer);
 
+        if (get_flag() == 1)
+        {
+            lcd_update(buffer, &x,1);
+            lcd_push_buffer(buffer);
+            set_flag(0);
 
+        }
     }
-lcd_reset();
-
-
-    }
-
-
 }
 
 
@@ -302,11 +321,11 @@ for (i = 1; i <= exp; i++)
 
 
 
- /*
+/*
 int main(void){
-  init_usb_uart( 9600 );
-    printf("hello World!\n");
-    while(1){}
+ init_usb_uart( 9600 );
+   printf("hello World!\n");
+   while(1){}
 
 >>>>>>> parent of 4bd0666... 6.2 start
 }
