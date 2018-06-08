@@ -50,15 +50,25 @@ int main(void)
     while (!(ADC1->ISR& 0x00000001));           // Wait until ready
 
 
-    ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
+
+    while (1){
+       ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
 
     ADC_StartConversion(ADC1);                  // Start ADC read
     while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
 
     uint16_t x = ADC_GetConversionValue(ADC1);  // Read the ADC value
 
-    printf("%d",x);
-    while (1){}
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_1Cycles5);
+    ADC_StartConversion(ADC1);                  // Start ADC read
+    while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+
+    uint16_t y = ADC_GetConversionValue(ADC1);  // Read the ADC value
+    gotoxy(1,1);
+    printf("%d %d",x,y);
+    clrscr();
+
+    }
 }
 
 
