@@ -36,16 +36,16 @@ uint8_t type_tex(char *c, int8_t *buffer, int8_t  x, int8_t  y){
 
 }
 
-void clrlcd(){
-    int8_t nothing[512];
-memset(nothing,0x00,512);
- lcd_push_buffer(nothing);
-}
+//void clrlcd(){
+//    int8_t nothing[512];
+//memset(nothing,0x00,512);
+// lcd_push_buffer(nothing);
+//}
 
-void lcd_update(int8_t *t_flag, int8_t *buffer, int8_t  x, int8_t  y){
-if (*t_flag == 0){
+void lcd_update( int8_t *buffer, int8_t  x, int8_t  y){
+if (t_flag == 1){
 type_tex("fag",  buffer,  x,  y);
-*t_flag ++;
+t_flag = 0;
 }
 
 }
@@ -65,13 +65,22 @@ int main(void) {
     printf("12");
 
 
-    //init_timer(priority);
+    init_timer(priority);
 //type_tex("gay", buffer, 0, 0);
 
-    lcd_update( t_flag, buffer, 0, 0);
-    lcd_push_buffer(buffer);
+
     while (1) {
-    printf("f");
+//clrlcd();
+
+lcd_update( buffer,  1, 1);
+lcd_push_buffer(buffer);
+    for (uint32_t i=0; i<10000000; i++){
+
+
+    }
+lcd_reset();
+
+
     }
 
 

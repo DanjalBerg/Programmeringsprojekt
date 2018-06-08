@@ -6,10 +6,10 @@
 #include "controller.h"
 
 struct interrupt_t{
-    volatile int16_t h, m, s, hs;
+     int16_t h, m, s, hs;
 };
-volatile int8_t *t_flag;
-struct interrupt_t t;
+volatile int8_t t_flag;
+volatile struct interrupt_t t;
 
 void init_timer(uint16_t priority);
 void time(struct interrupt_t *t);

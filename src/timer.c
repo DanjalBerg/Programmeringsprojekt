@@ -2,7 +2,6 @@
 
 
 void init_timer(uint16_t priority) {
-
     RCC->APB1ENR |= RCC_APB1Periph_TIM2;
     TIM2->CR1 = 0x0000; // Disable time
     TIM2->ARR = 63999999; // Set auto reload value (100e-2*64e6)-1
@@ -23,10 +22,10 @@ void time(struct interrupt_t *t){
 }
 
 void TIM2_IRQHandler(void){
-*t_flag = 0;
+    t_flag =1;
 
     printf("kris da noda jedi master son of Goku\n");
-    TIM2->SR &= ~0x0001; // clear interrupt bit
+
     t.hs++;
     if (t.hs == 100){
     t.hs=0;
@@ -40,6 +39,8 @@ void TIM2_IRQHandler(void){
     t.m=0;
     t.h++;
     }
+
+    TIM2->SR &= ~0x0001; // clear interrupt bit
 }
 
 void init_stopwatch(){
