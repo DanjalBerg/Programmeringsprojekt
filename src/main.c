@@ -21,47 +21,90 @@
 #include "timer.h"
 #include <string.h>
 #include "charset.h"
+#include "lcd.h"
 
-
-
-uint8_t type_tex(char *c, int8_t *buffer, int8_t x, int8_t y){
-    uint8_t k = 0;
-
-    while (c[k] != 0x00){
-        for (uint8_t i = 0 ; i < 5 ; i++){
-            buffer[x + y * 128 + i + k*5] = character_data[c[k] - 0x20][i];
-        }
-        k++;
-    }
-
-}
-
-void clrlcd(){
-    int8_t nothing[512];
-memset(nothing,0x00,512);
- lcd_push_buffer(nothing);
-}
-
-void lcd_update(){
-
-}
-
-int main(void) {
+int main(void)
+{
     init_usb_uart( 115200 );
     clrscr();
     gotoxy(1,1);
+    counter(1,1,100,51);
+ while (1)
+    {
+
+    }
+}
+
+
+
+
+
+
+/*
+int main(void)
+{
+    init_usb_uart( 115200 );
+    clrscr();
+    gotoxy(1,1);
+
+    RCC->CFGR2  &= ~RCC_CFGR2_ADCPRE12;         // Clear ADC12 prescaler bits
+    RCC->CFGR2  |=  RCC_CFGR2_ADCPRE12_DIV6;    // Set ADC12 prescaler to 6
+    RCC->AHBENR |=  RCC_AHBPeriph_ADC12;        // Enable clock for ADC12
+
+    ADC1->CR    = 0x00000000;                   // Clear CR register
+    ADC1->CFGR &=  0xFDFFC007;                  // Clear ADC1 config register
+    ADC1->SQR1 &= ~ADC_SQR1_L;                  // Clear regular sequence register 1
+
+    ADC1->CR |= 0x10000000;                     // Enable internal ADC voltage regulator
+    for(int i = 0 ; i < 1000 ; i++) {}          // Wait for about 16 microseconds
+
+    ADC1->CR |= 0x80000000;                     // Start ADC1 calibration
+    while (!(ADC1->CR & 0x80000000));           // Wait for calibration to finish
+        for (int i = 0 ; i < 100 ; i++) {}      // Wait for a little while
+
+    ADC1->CR |= 0x00000001;                     // Enable ADC1 (0x01 -Enable, 0x02 -Disable)
+    while (!(ADC1->ISR& 0x00000001));           // Wait until ready
+
+
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
+
+    ADC_StartConversion(ADC1);                  // Start ADC read
+    while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
+
+    uint16_t x = ADC_GetConversionValue(ADC1);  // Read the ADC value
+
+    printf("%d",x);
+    while (1){}
+}
+*/
+
+/*
+int main(void)
+{
+    init_usb_uart( 115200 );
+    clrscr();
+    gotoxy(1,1);
+
     init_spi_lcd();
     uint8_t buffer[512];
     memset(buffer,0x00,512);
     uint8_t priority = 1;
-    type_tex("Hejsa.", buffer, 0, 0);
+    uint8_t x = 1;
+
+
     init_timer(priority);
-    lcd_push_buffer(buffer);
-    while (1) {}
 
-
+    while (1)
+    {
+        if (get_flag() == 1)
+        {
+            lcd_update(buffer, &x,1);
+            lcd_push_buffer(buffer);
+            set_flag(0);
+        }
+    }
 }
-
+*/
 
 
 
@@ -278,11 +321,11 @@ for (i = 1; i <= exp; i++)
 
 
 
- /*
+/*
 int main(void){
-  init_usb_uart( 9600 );
-    printf("hello World!\n");
-    while(1){}
+ init_usb_uart( 9600 );
+   printf("hello World!\n");
+   while(1){}
 
 >>>>>>> parent of 4bd0666... 6.2 start
 }
