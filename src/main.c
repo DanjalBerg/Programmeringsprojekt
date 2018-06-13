@@ -21,18 +21,42 @@
 #include "timer.h"
 #include <string.h>
 #include "charset.h"
-#include "lcd.h"
+
 
 int main(void)
 {
+
     init_usb_uart( 115200 );
     clrscr();
-    gotoxy(1,1);
-    counter(1,1,100,51);
- while (1)
+    gotoxy(2,2);
+   int32_t mini = 10000;
+   int32_t xk = 0.8*10000 ;
+   int32_t it;
+   int32_t tk;
+    for (uint32_t i; i <= 128; i++ )
     {
 
+printFix(expand( SIN[i] ));
     }
+
+printf("\n");
+
+    for (uint32_t i; i <= 128; i++ )
+    {
+it = 10000 * (uint32_t)(expand(SIN[i+128]) & 0xFFFF) >> 16;
+printf("%d ", it);
+
+        if (mini > abs(xk - it)){
+        mini = abs(xk - it);
+        tk = i;
+        }
+    }
+    printf("\n min");
+    printf( " %d" , (tk*90/128));
+
+    while (1){}
+
+
 }
 
 
